@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
+  <meta name="author" content="Creative Tim">
+  <title>AXPO Dashboard</title>
+  <!-- Favicon -->
+  <link href="./assets/img/axpo_thmb.png" rel="icon" type="image/png">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  <!-- Icons -->
+  <link href="css/style.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+SC" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="grid-container">
+  <div class="a_header">
+<div style="position: absolute; top: 10%">
+         <div class="counter-wrapper"></div>
+<div style="display: none">
+	<input class="counter-input" value="235" type="text">
+	<a href="#" class="create-counter">Countify!</a></div><div style="text-align: center; font-size: 2em; color: rgba(255,255,255,0.3);">总人数</div></div>
+      
+    <div class="a_vid">
+      <video autoplay muted loop controls src="img/shutterstock_v1020030832.mp4" style="width: 100%; height: 100%; object-fit: cover"></video>
+      </div>
+  </div>
+  <div class="a_chart1" id="c1" >3</div>
+  <div class="a_chart2" id="c2">4</div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+  <script src="js/echarts.min.js"></script>
+<script src="js/charts.js"></script>
+ 
+  <script>
+    $(document).ready(function(){
+	counter();
+
+	$('.counter-input').focus(function() {
+		$(".error").fadeOut();
+	});
+
+	$(".create-counter").click(function(){
+
+		var intRegex = /^\d+$/;
+		var floatRegex = /^((\d+(\.\d *)?)|((\d*\.)?\d+))$/;
+		var str = $('.counter-input').val();
+
+		if(intRegex.test(str) || floatRegex.test(str)){
+			counter();
+		}
+		else{
+			$(".error").fadeIn();
+		}
+	});
+});
+
+function counter(){
+
+	$('.counter-wrapper').empty();
+
+	var number = $(".counter-input").val();
+	var numArray = number.split("");
+
+	for(var i=0; i<numArray.length; i++) { 
+		numArray[i] = parseInt(numArray[i], 10);
+		$(".counter-wrapper").append('<span class="digit-con"><span class="digit'+i+'">0<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br></span></span>');	
+	}
+
+	var increment = $('.digit-con').outerHeight();
+	var speed = 2000;
+
+	for(var i=0; i<numArray.length; i++) {
+		$('.digit'+i).animate({top: -(increment * numArray[i])}, speed);
+	}
+
+	
+}
+    
+    </script>
+</body>
+
+</html>
